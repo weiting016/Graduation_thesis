@@ -11,7 +11,8 @@ import random
 from itertools import repeat
 
 
-class TaskEnv_drift():
+#class TaskEnv_drift():
+class TaskEnv_drift(gymnasium.Env):
     def __init__(self,
                  time_out: int = 6,
                  timeout_reward=-1,
@@ -143,7 +144,7 @@ class TaskEnv_drift():
         elif action == 'client afgeleid' or action == 'contact beeindigd/weggegaan' or action == 'naar andere kamer/ruimte gestuurd':
             penalty = -1
         if add_penalty_dict != None:
-            penalty.get(action)
+            add_penalty_dict.get(action)
 
         return penalty
 
@@ -197,7 +198,10 @@ def change_frequencies(actions,states):
     action_num = len(actions)
     for s in states:
         #new_freq[s] = list(map(create_transition, repeat(states,action_num)))
-        new_freq[s] = list(map(drift_transition, repeat(states,action_num)))
+        new_freq[s] = list(map(drift_transition, repeat(states,action_num))) #what's important to investigate. here change all the probability in each state space. 
+        #maybe set it more clear. how big is the probability change
+        # discussion of the result
+        # in thesis explain it more detail. how you implement it, why choose to implement that way
    # print(new_freq.shape)
     return new_freq
     
