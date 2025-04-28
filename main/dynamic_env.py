@@ -264,6 +264,7 @@ def syn_state_action(prefix,n):
     return [f"{prefix}{i}" for i in range(n)]
 
 def change_states_severity(self,add_states):
+    #change reward distribution 
     add_num = len(add_states)
     add_severity = np.random.randint(-5.0,5.0,add_num) #define severity with in range -5.0 - 5.0
     severity_dict = {s: t for s, t in zip(add_states, add_severity)}
