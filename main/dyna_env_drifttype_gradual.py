@@ -10,7 +10,7 @@ from itertools import repeat
 
 """gradual drift - 在step时模型随机在两个observation space中选择"""
 
-class TaskEnv_driftype(gymnasium.Env):
+class TaskEnv_driftype_gradual(gymnasium.Env):
     def __init__(self,
                  time_out: int = 6,
                  timeout_reward=-1,
@@ -52,18 +52,31 @@ class TaskEnv_driftype(gymnasium.Env):
         self.time_reward_multiplicator = time_reward_multiplicator
         self.seed(2)
         self.observation_space = frequencies
+        self.observation_space_drift = None #store drifted distribution  for gradual drift
         self.action_space = Discrete(len(self.motions))
         self.choice_positions =['va','pp','po','sib']
         self.positions = np.random.choice(self.choice_positions, size=1)
         self.episode_actions = []
+        self.drift_type = None
+        self.drift_swap = False
 
     def step(self, action: int, info = False):
        # print("execute step function")
         motion = self.motions[action]
         current_position = self.positions
         #introduce function here, t=drift, which MDP used
-        new_position = self.get_next_state(self.observation_space[current_position][motion])[0]
+        observation_space = self.observation_space
+        if self.drift_type == 'gradual':
+            if self.drift_swap==False:
+            #print('drift gradual happen',type(self.observation_space),type(self.observation_space_drift))
+                observation_space = random.choice([self.observation_space,self.observation_space_drift])
+            #print(type(observation_space))
+            else:
+                 observation_space = self.observation_space_drift
+    
+        new_position = self.get_next_state(observation_space[current_position][motion])[0]
         transition_reward = self.severity[new_position]
+
         if self.flag == False: #without drift
             action_penalty = self.get_action_reward(motion)
         else: #add drift, use extended action_reward function
@@ -166,6 +179,7 @@ class TaskEnv_driftype(gymnasium.Env):
         """
         if self.flag == True:
             # state action总数不变，只是部分path关闭
+            self.drift_type = drift_type
             print("drift happen")
             if add_actions != 0:
                 syn_actions = syn_state_action('a', add_actions)  # ['a1','a2','a3']
@@ -175,10 +189,7 @@ class TaskEnv_driftype(gymnasium.Env):
             
     
             global change_frequencies
-
-                # Apply drift based on type
-            if drift_type == "sudden":
-                # Sudden drift: full change at once
+            if drift_type == 'sudden':
                 self.observation_space = change_frequencies(
                     self.motions, 
                     change_at_states,
@@ -186,51 +197,15 @@ class TaskEnv_driftype(gymnasium.Env):
                     drift_dis_type=drift_dis_type,
                     intensity=intensity
                 )
-            
-            elif drift_type == "gradual":
-                print('gradual drift happen')
-                # Gradual drift: interpolate between old and new
-                if not hasattr(self, 'original_observation_space'):
-                    self.original_observation_space = self.observation_space.copy()
-                
-                target_freq = change_frequencies(
-                    self.motions,
+            elif drift_type == 'gradual':
+                 self.observation_space_drift = change_frequencies(
+                    self.motions, 
                     change_at_states,
                     original_freq=self.observation_space,
                     drift_dis_type=drift_dis_type,
                     intensity=intensity
                 )
-                # Linear interpolation (alpha = intensity)
-                alpha = intensity
-                mixed = pd.DataFrame(index=self.motions)
-                for state in change_at_states:
-                    mixed[state] = [
-                        {
-                            s: (1 - alpha) * self.original_observation_space[state][action][s] + 
-                            alpha * target_freq[state][action][s]
-                            for s in change_at_states
-                        }
-                        for action in self.motions
-                    ]
-                print(mixed)
-                self.observation_space = mixed
-            
-            elif drift_type == "incremental":
-                # Incremental drift: small random adjustments
-                drifted = self.observation_space.copy()
-                for state in change_at_states:
-                    for action in self.motions:
-                        dist = drifted[state][action]
-                        for s in dist:
-                            noise = np.random.normal(0, intensity * 0.1)  # Small step
-                            dist[s] = max(dist[s] + noise, 0)
-                        # Normalize
-                        total = sum(dist.values())
-                        if total > 0:
-                            for s in dist:
-                                dist[s] /= total
-                        drifted[state][action] = dist
-                self.observation_space = drifted
+        
             
         """
             self.observation_space = change_frequencies(
@@ -244,7 +219,6 @@ class TaskEnv_driftype(gymnasium.Env):
             """
         return
 
-    
 
 def drift_transition(states):
         """
