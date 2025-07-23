@@ -1,0 +1,210 @@
+analysis for agent type: Q
+std of reward: 2.0799290847844856
+std of len: 0.5603519706985598
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -9.80
+Agent pre-drift average reward: -1.72
+Optimal pre-drift average reward: -0.91
+Agent post-drift average reward: -1.81
+Optimal post-drift average reward: -1.16
+Recovery standard (90% of relative performance): 0.86
+Recovered: True
+Recovery achieved in 200 windows
+
+
+analysis for agent type: DQN
+std of reward: 2.111642277133124
+std of len: 0.6727252524665047
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -11.20
+Agent pre-drift average reward: -1.57
+Optimal pre-drift average reward: -0.91
+Agent post-drift average reward: -2.04
+Optimal post-drift average reward: -1.16
+Recovery standard (90% of relative performance): 0.89
+Recovered: False
+Recovery not achieved in 651 windows
+
+
+analysis for agent type: PPO
+std of reward: 2.6853350221910666
+std of len: 0.6529660150268506
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -11.40
+Agent pre-drift average reward: -3.54
+Optimal pre-drift average reward: -0.91
+Agent post-drift average reward: -2.31
+Optimal post-drift average reward: -1.16
+Recovery standard (90% of relative performance): 0.71
+Recovered: True
+Recovery achieved in 200 windows
+
+
+analysis for agent type: MetaDQN
+std of reward: 4.31365660397906
+std of len: 0.8682570650825479
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -17.60
+Agent pre-drift average reward: -4.17
+Optimal pre-drift average reward: -0.91
+Agent post-drift average reward: -7.63
+Optimal post-drift average reward: -1.16
+Recovery standard (90% of relative performance): 0.76
+Recovered: False
+Recovery not achieved in 651 windows
+
+
+analysis for agent type: Opt
+std of reward: 1.7188756647938233
+std of len: 0.5237551140572604
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -9.00
+Agent pre-drift average reward: -0.91
+Optimal pre-drift average reward: -0.91
+Agent post-drift average reward: -1.24
+Optimal post-drift average reward: -1.16
+Recovery standard (90% of relative performance): 0.95
+Recovered: True
+Recovery achieved in 364 windows
+
+
+analysis for agent type: Q
+std of reward: 2.093398101168845
+std of len: 0.576033036341594
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -12.00
+Agent pre-drift average reward: -1.88
+Optimal pre-drift average reward: -0.87
+Agent post-drift average reward: -2.12
+Optimal post-drift average reward: -1.27
+Recovery standard (90% of relative performance): 0.86
+Recovered: True
+Recovery achieved in 200 windows
+
+
+analysis for agent type: DQN
+std of reward: 2.008315628679689
+std of len: 0.6239100682330991
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -10.60
+Agent pre-drift average reward: -1.64
+Optimal pre-drift average reward: -0.87
+Agent post-drift average reward: -1.70
+Optimal post-drift average reward: -1.27
+Recovery standard (90% of relative performance): 0.87
+Recovered: True
+Recovery achieved in 200 windows
+
+
+analysis for agent type: PPO
+std of reward: 2.6378960832511478
+std of len: 0.6476680933809179
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -16.80
+Agent pre-drift average reward: -3.01
+Optimal pre-drift average reward: -0.87
+Agent post-drift average reward: -2.33
+Optimal post-drift average reward: -1.27
+Recovery standard (90% of relative performance): 0.82
+Recovered: True
+Recovery achieved in 200 windows
+
+
+analysis for agent type: MetaDQN
+std of reward: 4.067338107834989
+std of len: 0.834383012373735
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -15.20
+Agent pre-drift average reward: -2.72
+Optimal pre-drift average reward: -0.87
+Agent post-drift average reward: -6.19
+Optimal post-drift average reward: -1.27
+Recovery standard (90% of relative performance): 0.83
+Recovered: False
+Recovery not achieved in 651 windows
+
+
+analysis for agent type: Opt
+std of reward: 1.787833196194479
+std of len: 0.5259902657247453
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -10.60
+Agent pre-drift average reward: -0.87
+Optimal pre-drift average reward: -0.87
+Agent post-drift average reward: -1.37
+Optimal post-drift average reward: -1.27
+Recovery standard (90% of relative performance): 0.95
+Recovered: True
+Recovery achieved in 283 windows
+
+
+analysis for agent type: Q
+std of reward: 2.121936389244503
+std of len: 0.5571139919262484
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -11.00
+Agent pre-drift average reward: -2.16
+Optimal pre-drift average reward: -1.02
+Agent post-drift average reward: -1.94
+Optimal post-drift average reward: -1.21
+Recovery standard (90% of relative performance): 0.84
+Recovered: True
+Recovery achieved in 204 windows
+
+
+analysis for agent type: DQN
+std of reward: 2.206855174224172
+std of len: 0.5867264780116882
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -11.00
+Agent pre-drift average reward: -1.88
+Optimal pre-drift average reward: -1.02
+Agent post-drift average reward: -1.68
+Optimal post-drift average reward: -1.21
+Recovery standard (90% of relative performance): 0.87
+Recovered: True
+Recovery achieved in 418 windows
+
+
+analysis for agent type: PPO
+std of reward: 2.671832462936252
+std of len: 0.6538004588557582
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -11.40
+Agent pre-drift average reward: -3.48
+Optimal pre-drift average reward: -1.02
+Agent post-drift average reward: -3.13
+Optimal post-drift average reward: -1.21
+Recovery standard (90% of relative performance): 0.73
+Recovered: True
+Recovery achieved in 757 windows
+
+
+analysis for agent type: MetaDQN
+std of reward: 2.356413034677919
+std of len: 0.6023950115995318
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -12.60
+Agent pre-drift average reward: -3.16
+Optimal pre-drift average reward: -1.02
+Agent post-drift average reward: -3.10
+Optimal post-drift average reward: -1.21
+Recovery standard (90% of relative performance): 0.77
+Recovered: True
+Recovery achieved in 395 windows
+
+
+analysis for agent type: Opt
+std of reward: 1.7073643313598887
+std of len: 0.5224205106999532
+recovery check result: ========== RECOVERY EVALUATION ==========
+r min: -11.00
+Agent pre-drift average reward: -1.02
+Optimal pre-drift average reward: -1.02
+Agent post-drift average reward: -1.23
+Optimal post-drift average reward: -1.21
+Recovery standard (90% of relative performance): 0.95
+Recovered: True
+Recovery achieved in 478 windows
+
+

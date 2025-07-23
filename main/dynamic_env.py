@@ -53,7 +53,7 @@ class TaskEnv_drift(gymnasium.Env):
         self.goal_reward = goal_reward
         self.time_reward_multiplicator = time_reward_multiplicator
         self.seed(2)
-        self.observation_space = frequencies
+        self.observation_space = frequencies 
         self.action_space = Discrete(len(self.motions))
         self.choice_positions =['va','pp','po','sib']
         self.positions = np.random.choice(self.choice_positions, size=1)
@@ -86,8 +86,9 @@ class TaskEnv_drift(gymnasium.Env):
             reward = transition_reward + action_penalty
             done = False
         self.timer += 1
+
         if done and info:
-            return self.positions, reward, done, self.episode_actions
+            return self.positions, reward, done, self.episode_actions #返回了episode actions说明episode结束了
         else:
             return self.positions, reward, done, []
 
@@ -171,13 +172,8 @@ class TaskEnv_drift(gymnasium.Env):
 
                 self.motions.extend(syn_actions)
                 self.action_penalty_d = action_penalty_dict(syn_actions)
-            if add_states != 0:
-                syn_states = syn_state_action('s',add_states)
-                self.states.extend(syn_states)
-                self.choice_positions.extend(syn_states)
-                change_states_severity(self,syn_states)
 
-            self.observation_space  = change_frequencies(self.motions, self.states)
+            self.observation_space  = change_frequencies(self.motions, self.choice_positions)
             self.action_space = Discrete(len(self.motions))
 
             """self.severity = {'va': 0.0, 
@@ -197,12 +193,9 @@ def change_frequencies(actions,states):
     new_freq = pd.DataFrame(index = actions)
     action_num = len(actions)
     for s in states:
-        #new_freq[s] = list(map(create_transition, repeat(states,action_num)))
+        #new_freq[s] = list(map(create_transition, repeat(states,action_num))) 
         new_freq[s] = list(map(drift_transition, repeat(states,action_num))) #what's important to investigate. here change all the probability in each state space. 
-        #maybe set it more clear. how big is the probability change
-        # discussion of the result
-        # in thesis explain it more detail. how you implement it, why choose to implement that way
-   # print(new_freq.shape)
+
     return new_freq
     
 
@@ -214,7 +207,7 @@ def create_transition(states):
     type of drift
     """
     #print("excute create transitions ")
-    np.random.seed(2) #set the random seed make result reproducable
+    np.random.seed(8) #set the random seed make result reproducable
     possible_path = len(states) #possible transitions number
     path_num = random.randint(1, possible_path+1)  #assigned real path
     trans_prob = np.random.dirichlet(np.ones(path_num), size=1)[0] #assign transition probability 可能长度不一样
@@ -238,7 +231,7 @@ def drift_transition(states):
     do not influence the size state and action space
     """
     #print('excute drift transition')
-    np.random.seed(2) #set the random seed make result reproducabl
+    np.random.seed(8) #set the random seed make result reproducabl
     possible_path = len(states) #possible transitions number
     #if self.close == True:
     path_num = random.randint(1, possible_path)  #assigned real path,less than orignal pathes

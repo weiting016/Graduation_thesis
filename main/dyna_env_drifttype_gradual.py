@@ -12,7 +12,7 @@ from itertools import repeat
 
 class TaskEnv_driftype_gradual(gymnasium.Env):
     def __init__(self,
-                 time_out: int = 6,
+                 time_out: int = 10, #maximal take 10 steps
                  timeout_reward=-1,
                  goal_reward=1,
                  time_reward_multiplicator=1):
@@ -58,9 +58,9 @@ class TaskEnv_driftype_gradual(gymnasium.Env):
         self.positions = np.random.choice(self.choice_positions, size=1)
         self.episode_actions = []
         self.drift_type = None
-        self.drift_swap = False
+        self.drift_swap = False #after 300 episode swap to new distribution
 
-    def step(self, action: int, info = False):
+    def step(self, action: int, info = True):
        # print("execute step function")
         motion = self.motions[action]
         current_position = self.positions
@@ -87,7 +87,6 @@ class TaskEnv_driftype_gradual(gymnasium.Env):
 
         #print("transition_reward",transition_reward)
        #print("action_penalty",action_penalty)
-
         if self._is_timeout():
             reward = self.timeout_reward 
             done = True
@@ -98,6 +97,7 @@ class TaskEnv_driftype_gradual(gymnasium.Env):
             reward = transition_reward + action_penalty
             done = False
         self.timer += 1
+
         if done and info:
             return self.positions, reward, done, self.episode_actions
         else:
@@ -343,6 +343,7 @@ def create_transition(states):
         trans_dict = {s: t for s, t in zip(states, trans_prob)}
     # print(trans_dict)
         return trans_dict
+
 
 def change_states_severity(self,add_states):
         #暂时不考虑add state的情况

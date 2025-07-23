@@ -1,0 +1,21 @@
+analysis for agent type: Q
+std of reward: 2.1893723927013653
+std of len: 0.5960915785917691
+analysis for agent type: Q
+std of reward: 2.171170533958202
+std of len: 0.6006639108410361
+analysis for agent type: Q
+std of reward: 2.1108295733024836
+std of len: 0.5707344991155919
+analysis for agent type: Q
+std of reward: 2.0925761857028102
+std of len: 0.5691974220034904
+analysis for agent type: Q
+std of reward: 2.1536540924933556
+std of len: 0.5890865676001993
+analysis for agent type: Q
+std of reward: 2.1523263267404515
+std of len: 0.5971238699799006
+analysis for agent type: Q
+std of reward: 2.1579807875338184
+std of len: 0.5835580208675234
